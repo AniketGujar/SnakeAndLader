@@ -16,22 +16,27 @@ function rollDice() {
 }
 
 function option(){
-	optionDice=$((RANDOM%3+1))
+	while [[ $position -lt 100 ]]
+	do
 
-        case $optionDice in
-        1) position=0
-	   echo "Option: No Play" ;;
+		optionDice=$((RANDOM%3+1))
 
-        2) position=$((position+$dice))
-	   echo "Option: Ladder" ;;
+	        case $optionDice in
+        	1) echo "Option: No Play" ;;
 
-        3) position=$((position-$dice))
-	   echo "Option: Snake"
-                if [[ position -le 0 ]]
-                then
-                   position=0
-                fi 		;;
-	esac
+	        2) position=$((position+$dice))
+		   echo "Option: Ladder" ;;
+
+	        3) position=$((position-$dice))
+		   echo "Option: Snake"
+
+	               	if [[ position -le 0 ]]
+                	then
+                	   position=0
+                	fi 		;;
+		esac
+	done
+
 }
 
 echo "Snake and Laddder Game Started"
