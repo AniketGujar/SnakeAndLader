@@ -1,17 +1,19 @@
 #!/bin/bash
 
 position=0
+numOfTimesPlayed=0
 
 function snakeLadder() {
         echo "Player added at" $position "position"
         option
         echo "Position after dice rolled=" $position
-
+	echo "Number of Times Dice was Rolled = " $numOfTimesPlayed
 }
 
 function rollDice() {
         dice=$((RANDOM%6+1))
-        echo "Dice Rolled=" $dice
+	numOfTimesPlayed=$((numOfTimesPlayed+1))
+        echo "Dice Rolled =" $dice
 }
 
 function option(){
@@ -41,7 +43,6 @@ function option(){
 		esac
 	echo "Position = "$position
 	done
-
 }
 
 echo "Snake and Laddder Game Started"
