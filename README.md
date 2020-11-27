@@ -1,10 +1,15 @@
 # Snake And Ladder Program Output
 
 Snake and Laddder Game Started
+
 Players added at 0 position
+
 Option: No Play
+
 Player1 Position 0
+
 Option: No Play
+
 Player2 Position 0
 **************************
 Option: No Play
