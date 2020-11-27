@@ -1,23 +1,22 @@
 #!/bin/bash
 
-position=0
+position2=0
+position1=0
 numOfTimesPlayed=0
 
 function snakeLadder() {
-        echo "Player added at" $position "position"
+        echo "Players added at" $position1 "position"
         option
-        echo "Position after dice rolled=" $position
 	echo "Number of Times Dice was Rolled = " $numOfTimesPlayed
 }
 
 function rollDice() {
         dice=$((RANDOM%6+1))
 	numOfTimesPlayed=$((numOfTimesPlayed+1))
-        echo "Dice Rolled =" $dice
 }
 
 function option(){
-	while [[ $position -lt 100 ]]
+	while [[ $position1 -lt 100 && $position2 -lt 100 ]]
 	do
 		rollDice
 		optionDice=$((RANDOM%3+1))
@@ -25,25 +24,57 @@ function option(){
 	        case $optionDice in
         	1) echo "Option: No Play" ;;
 
-	        2) position=$((position+$dice))
+	        2) position1=$((position1+$dice))
 		   echo "Option: Ladder"
 
-			if [[ position -gt 100 ]]
+			if [[ position1 -gt 100 ]]
 			then
-				position=$((position-$dice))
+				position1=$((position1-$dice))
 			fi		 ;;
 
-	        3) position=$((position-$dice))
+	        3) position1=$((position1-$dice))
 		   echo "Option: Snake"
 
-	               	if [[ position -le 0 ]]
+	               	if [[ position1 -le 0 ]]
                 	then
-                	   position=0
+                	   position1=0
                 	fi 		;;
 		esac
-	echo "Position = "$position
+		echo "Player1 Position" $position1
+
+		rollDice
+		optionDice=$((RANDOM%3+1))
+                case $optionDice in
+                1) echo "Option: No Play" ;;
+
+                2) position2=$((position2+$dice))
+                   echo "Option: Ladder"
+
+                        if [[ position2 -gt 100 ]]
+                        then
+                                position2=$((position2-$dice))
+                        fi               ;;
+
+                3) position2=$((position2-$dice))
+                   echo "Option: Snake"
+
+                        if [[ position2 -le 0 ]]
+                        then
+                           position2=0
+                        fi              ;;
+                esac
+		 echo "Player2 Position" $position2
+		 echo "**************************"
 	done
+
+	if [[ position1 -gt position2 ]]
+	then
+		echo "Player1 Won the game"
+	else
+		echo "Player2 Won the game"
+	fi
 }
 
 echo "Snake and Laddder Game Started"
+
 snakeLadder
